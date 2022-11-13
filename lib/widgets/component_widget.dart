@@ -1,58 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_loading/card_loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../data/const/const.dart';
-
-Padding searchPanel(TextEditingController textEditingController, onTap) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: Row(
-      children: [
-        Expanded(
-          child: Container(
-              height: 40.0,
-              decoration: const BoxDecoration(
-                  color: black_86,
-                  borderRadius: BorderRadius.all(Radius.circular(22))),
-              child: Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: TextField(
-                    controller: textEditingController,
-                    style: const TextStyle(fontSize: 14, color: Colors.white70),
-                    decoration: const InputDecoration(
-                      fillColor: black_93,
-                      hintText: 'Search...',
-                      contentPadding:
-                          EdgeInsets.only(left: 14.0, bottom: 2.0, top: 2.0),
-                      hintStyle: TextStyle(color: Colors.white70),
-                      suffixIcon: Icon(
-                        Icons.search,
-                        color: Colors.white70,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                        borderSide: BorderSide(width: 1, color: Colors.white70),
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                          borderSide: BorderSide(
-                            width: 1,
-                          )),
-                    ),
-                  ))),
-        ),
-        IconButton(
-            onPressed: onTap,
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.white,
-            ))
-      ],
-    ),
-  );
-}
+import '../models/article_model.dart';
+import 'card_widget.dart';
 
 Padding loadingArticle(Size size) {
   return Padding(
@@ -261,5 +215,40 @@ SizedBox imageArticle(Size size, BuildContext context, String imageUrl) {
         fit: BoxFit.cover,
         height: size.height * .30,
         width: MediaQuery.of(context).size.width),
+  );
+}
+
+Container listArticle(
+    BuildContext context, List<Article> listArticle, Size size) {
+  return Container(
+    height: MediaQuery.of(context).size.height,
+    margin: const EdgeInsets.only(top: 24),
+    child: AnimationLimiter(
+        child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            padding:
+                const EdgeInsets.only(right: 20, left: 20, bottom: 60, top: 10),
+            scrollDirection: Axis.vertical,
+            itemCount: listArticle.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return AnimationConfiguration.staggeredList(
+                position: index,
+                delay: const Duration(milliseconds: 350),
+                child: SlideAnimation(
+                  duration: const Duration(milliseconds: 2200),
+                  verticalOffset: 140,
+                  curve: Curves.ease,
+                  child: FadeInAnimation(
+                    curve: Curves.easeOut,
+                    duration: const Duration(milliseconds: 2500),
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: cardArticle(context, listArticle, index, size),
+                    ),
+                  ),
+                ),
+              );
+            })),
   );
 }

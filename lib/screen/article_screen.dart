@@ -21,7 +21,6 @@ class ArticleScreen extends StatefulWidget {
 class _ArticleArticleScreen extends State<ArticleScreen> {
   List<Article> article;
   int index;
-
   _ArticleArticleScreen(this.article, this.index);
 
   @override
@@ -60,7 +59,7 @@ class _ArticleArticleScreen extends State<ArticleScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                              flex: 5,
+                              flex: 4,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -78,16 +77,18 @@ class _ArticleArticleScreen extends State<ArticleScreen> {
                                 ],
                               ),
                             ),
-                            RichText(
-                              text: TextSpan(
-                                text: article[index]
-                                    .publishedDate
-                                    .substring(0, 10),
-                                style: GoogleFonts.lato(
-                                  textStyle: const TextStyle(
-                                      fontSize: 10,
-                                      color: Colors.white,
-                                      letterSpacing: .9),
+                            Expanded(
+                              child: RichText(
+                                text: TextSpan(
+                                  text: article[index]
+                                      .publishedDate
+                                      .substring(0, 10),
+                                  style: GoogleFonts.lato(
+                                    textStyle: const TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.white,
+                                        letterSpacing: .9),
+                                  ),
                                 ),
                               ),
                             ),

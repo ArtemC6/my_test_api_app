@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../data/const/const.dart';
 import '../models/article_model.dart';
-import '../pages/article_screen.dart';
+import '../screen/article_screen.dart';
 
 class interestingArticle extends StatelessWidget {
   List<Article> listArticle = [];

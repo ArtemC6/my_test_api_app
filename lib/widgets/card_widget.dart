@@ -2,12 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../bloc/article_state.dart';
 import '../data/const/const.dart';
-import '../pages/article_screen.dart';
+import '../models/article_model.dart';
+import '../screen/article_screen.dart';
 
 InkWell cardArticle(
-    BuildContext context, ArticleLoadedState state, int index, Size size) {
+    BuildContext context, List<Article> listArticle, int index, Size size) {
   return InkWell(
     splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
@@ -15,7 +15,7 @@ InkWell cardArticle(
       Navigator.push(
           context,
           FadeRouteAnimation(ArticleScreen(
-            article: state.loadedArticle,
+            article: listArticle,
             index: index,
           )));
     },
@@ -51,7 +51,7 @@ InkWell cardArticle(
                           ),
                         ),
                       ),
-                  imageUrl: state.loadedArticle[index].imageUrl,
+                  imageUrl: listArticle[index].imageUrl,
                   fit: BoxFit.cover,
                   height: size.height * .28,
                   width: MediaQuery.of(context).size.width),
@@ -65,7 +65,7 @@ InkWell cardArticle(
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
-                      text: state.loadedArticle[index].title,
+                      text: listArticle[index].title,
                       style: GoogleFonts.lato(
                         textStyle: const TextStyle(
                             fontSize: 12.5,
@@ -83,7 +83,7 @@ InkWell cardArticle(
                           flex: 8,
                           child: RichText(
                             text: TextSpan(
-                              text: state.loadedArticle[index].byline,
+                              text: listArticle[index].byline,
                               style: GoogleFonts.lato(
                                 textStyle: const TextStyle(
                                     fontSize: 11.5,
@@ -97,7 +97,8 @@ InkWell cardArticle(
                           flex: 2,
                           child: RichText(
                             text: TextSpan(
-                              text: state.loadedArticle[index].publishedDate
+                              text: listArticle[index]
+                                  .publishedDate
                                   .substring(0, 10),
                               style: GoogleFonts.lato(
                                 textStyle: const TextStyle(
