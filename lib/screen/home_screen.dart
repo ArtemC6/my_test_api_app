@@ -52,6 +52,7 @@ class _HomeScreen extends State<HomeScreen>
       }
     }
 
+
     BlocBuilder<ArticleBloc, ArticleState> listArticleMain(Size size) {
       return listViewArticle(
           size, searchArticle, textEditingController, listSearchArticle);

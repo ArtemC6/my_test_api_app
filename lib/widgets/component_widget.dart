@@ -17,7 +17,7 @@ Padding loadingArticle(Size size) {
         CardLoading(
           cardLoadingTheme: CardLoadingTheme(
               colorOne: Colors.white.withOpacity(.20), colorTwo: black_86),
-          height: size.height * .26,
+          height: size.height * .22,
           borderRadius: const BorderRadius.all(Radius.circular(15)),
           width: size.width,
           margin: const EdgeInsets.only(bottom: 10),

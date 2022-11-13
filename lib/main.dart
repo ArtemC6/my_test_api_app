@@ -43,6 +43,6 @@ class _ManagerState extends State<Manager> {
         create: (context) => ArticleBloc(articleRepository: articleRepository),
         child: const Scaffold(
             backgroundColor: black_86,
-            body: SizedBox.expand(child: HomeScreen())));
+            body: HomeScreen()));
   }
 }
